@@ -107,7 +107,7 @@ export const Blogs = ({blogs, pagination, categories, selectedCategories} : Blog
               categories && categories.map((item, index) => {
                 return (
                   <li className="mx-3 my-2 lg:mx-0" key={index}>
-                    <label htmlFor={`category_select_${item}`}>
+                    <label htmlFor={`category_select_${item}`} className='flex'>
                       <input type="checkbox" className="mr-2" id={`category_select_${item}`} onChange={handleCategoryFilter} value={item} defaultChecked={selectedCategories?.includes(item)} />
                       <label htmlFor={`category_select_${item}`}>{item}</label>
                     </label>
