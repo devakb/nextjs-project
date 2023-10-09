@@ -21,7 +21,7 @@ const Loading = () => {
 
 export const BlogsItemSkeleton = () => {
   return (
-    <div className="w-full">
+    <div className="w-full lg:w-9/12">
       <div className="flex flex-wrap mb-10">
         {[...Array(20).keys()].map((item, index) => {
           return (

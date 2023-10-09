@@ -102,7 +102,7 @@ export const Blogs = ({blogs, pagination, categories, selectedCategories} : Blog
 
         <div className="w-full lg:w-3/12 px-2">
           <h5 className="font-medium mb-4">CATEGORIES</h5>
-          <ul className="flex flex-wrap lg:block w-auto lg:mb-0 mb-10">
+          <ul className="flex flex-wrap lg:block w-auto lg:mb-0 mb-10 max-h-[200px] lg:max-h-none overflow-y-auto">
             {
               categories && categories.map((item, index) => {
                 return (
