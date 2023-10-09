@@ -98,15 +98,15 @@ export const Blogs = ({blogs, pagination, categories, selectedCategories} : Blog
   }, [blogs]);
 
   return (
-   <div className="flex">
+   <div className="flex flex-wrap justify-between">
 
-        <div className="w-[300px] px-2">
+        <div className="w-full lg:w-3/12 px-2">
           <h5 className="font-medium mb-4">CATEGORIES</h5>
-          <ul>
+          <ul className="flex flex-wrap lg:block w-auto lg:mb-0 mb-10">
             {
               categories && categories.map((item, index) => {
                 return (
-                  <li className="my-2" key={index}>
+                  <li className="mx-3 my-2 lg:mx-0" key={index}>
                     <label htmlFor={`category_select_${item}`}>
                       <input type="checkbox" className="mr-2" id={`category_select_${item}`} onChange={handleCategoryFilter} value={item} defaultChecked={selectedCategories?.includes(item)} />
                       <label htmlFor={`category_select_${item}`}>{item}</label>
@@ -117,7 +117,7 @@ export const Blogs = ({blogs, pagination, categories, selectedCategories} : Blog
             }
           </ul>
         </div>
-        <div className="w-full">
+        <div className="w-full lg:w-9/12">
 
           <Pagination pagination={pagination} changePage={changePage}/>
 
@@ -126,7 +126,7 @@ export const Blogs = ({blogs, pagination, categories, selectedCategories} : Blog
                 {
                   blogs && blogs.map((item, index) => {
                     return (
-                      <Link key={index} href={`/blogs/${item.id}`} className="w-6/12 lg:w-4/12 px-2 py-2">
+                      <Link key={index} href={`/blogs/${item.id}`} className="w-full md:w-6/12 lg:w-4/12 px-2 py-2">
                           <div className="border rounded-lg bg-white h-full flex flex-col relative">
 
                               <div className="absolute right-1 top-2">
@@ -173,7 +173,7 @@ const Pagination = ({pagination,changePage} : {pagination: PaginationInterface|n
   let disabledNext = (pagination?.currentPage ?? 1) === (pagination?.totalPages ?? 0);
 
   return (
-    (pagination?.totalPages ?? 0) > 1 && <div className="flex justify-end">
+    (pagination?.totalPages ?? 0) > 1 && <div className="w-full"><div className="flex justify-end">
         <div className="flex gap-1 select-none">
 
             <div onClick={() => changePage((pagination?.currentPage ?? 1) - 1, pagination?.currentPage ?? 1)} className={`${disabledPrev ? 'bg-slate-200 opacity-50' : 'hover:bg-slate-100  cursor-pointer '} rounded-lg w-20 h-10 border flex items-center justify-center`}>
@@ -189,6 +189,7 @@ const Pagination = ({pagination,changePage} : {pagination: PaginationInterface|n
             </div>
 
         </div>
+    </div>
     </div>
   )
 }
