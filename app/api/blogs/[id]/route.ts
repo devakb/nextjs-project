@@ -3,11 +3,11 @@ import fs from 'fs';
 import { PageNotFoundError } from "next/dist/shared/lib/utils";
 
 
-const getSingleData = (id: number) : Array<any> => {
+const getSingleData = async (id: number) => {
   
-  let fs_data = fs.readFileSync("./app/api/blogs/data.json", 'utf-8');
+  let fs_data : Array<any> = await fetch("https://devakb.github.io/json-server/db.json").then(res => res.json()).then(res => res.blogs ?? []);
 
-  let data : Array<any> = JSON.parse(fs_data); // all data
+  let data : Array<any> = fs_data; // all data
 
   data = data.reduce((acc, curItem) => {
 
@@ -34,7 +34,7 @@ export const GET = async (request: NextRequest, { params }: { params: { id: stri
 
     if(!isNaN(id)){
 
-      data = getSingleData(id);
+      data = await getSingleData(id);
       
     }
     

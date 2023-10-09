@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from 'fs';
+
 
 const categories = [
   "Technology",
@@ -24,13 +24,13 @@ const categories = [
   "Hobbies and Crafts"
 ];
 
-const getAllData = (limit: number, offset: number, perPage: number, request: NextRequest) => {
+const getAllData = async (limit: number, offset: number, perPage: number, request: NextRequest) => {
   
   const { searchParams } = request.nextUrl;
 
-  let fs_data = fs.readFileSync("./app/api/blogs/data.json", 'utf-8');
+  let fs_data : Array<any> =  await fetch("https://devakb.github.io/json-server/db.json").then(res => res.json()).then(res => res.blogs ?? []);
 
-  let data : Array<any> = JSON.parse(fs_data); // all data
+  let data : Array<any> = fs_data; // all data
 
   let categories : Array<String> = [];
 
@@ -91,7 +91,7 @@ export const GET = async (request: NextRequest) => {
     let limit = perPage * page;
     let offset = limit - perPage;
 
-    let blogData = getAllData(limit, offset, perPage, request);
+    let blogData = await getAllData(limit, offset, perPage, request);
 
     await new Promise(resolve => setTimeout(resolve, 1000))
     
